@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar repositório') {
+            steps {
+                git branch: 'main', url: 'https://github.com/meskarin/testes-e2e-ebac-shop.git'
+            }
+        }
+        stage('Installar dependencias') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Executar teste') {
+            steps {
+                sh 'npm run cy:run'
+            }
+        }
+    }
+    
+}
